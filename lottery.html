@@ -4,66 +4,23 @@
 <head>
   <meta charset="utf-8">
   <title>五倍樂透手動選號機</title>
-  <style type="text/css">
-    .wrap {
-      padding: 1em;
-    }
-
-    button {
-      font-size: 22px;
-    }
-
-    .lottery-nums {
-      overflow: hidden;
-      width: 600px;
-    }
-
-    .lottery-nums>div {
-      display: block;
-      float: left;
-      width: 25px;
-      height: 25px;
-      border: 1px solid #999;
-      background-color: #fff;
-      color: #555;
-      font-size: 20px;
-      padding: 10px;
-      text-align: center;
-      line-height: 25px;
-      margin-right: 10px;
-      margin-bottom: 10px;
-    }
-
-    .lottery-nums .selected {
-      background-color: green;
-      color: #fff;
-    }
-
-    .lottery-nums .highlight {
-      background-color: red;
-      color: #fff;
-    }
-
-    .lottery-nums .selected.highlight {
-      background-color: yellow;
-      color: #333;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
+<div class="warning"></div>
   <input type="text">
 
   <div class="wrap">
 
     <div class="lottery-nums"></div>
-    <div class="lottery-result">開獎號碼: <span></span></div>
+    <div class="lottery-guest">已選號碼： <span></span></div>
+    <div class="lottery-result">開獎號碼： <span></span></div>
 
-    <p>
-      <button class="btn-lottery">兌獎</button>
-      <button class="reset">重設</button>
-    </p>
+    <div class="btn-box">
+      <button class="btn btn-lottery">兌獎</button>
+      <button class="btn reset">重設</button>
+    </div>
 
   </div>
 
@@ -78,26 +35,50 @@
 
   <script type="text/javascript">
     let i;
+    const lotteryArr = [];
 
     // 產生 49 顆按鈕
-    for (i = 1; i < 50; i++) {
-      $('.lottery-nums').append('<div>' + i + '</div>');
+    for(i=0; i<50; i++){
+      $('.lottery-nums').append(`<div>${i}</div>`);
     }
 
     // 1. 為數字按鈕加入事件
-    $('.lottery-nums div').on('click', function () {
-
+    $('.lottery-nums div').on('click', function (e) {
+      let target = $(e.target);
+      let text = $(target).text();
+      let check = lotteryArr.indexOf(text);
+      const warning = $('.warning');
+      
+      warning.text('');
+      if( check === -1 ){
+        $(target).addClass('selected');
+        lotteryArr.push(text);
+      } else {
+        warning.text('不能重複選');
+      }
+      if (lotteryArr.length > 6) {
+        lotteryArr.length === 5;
+        target.removeClass('selected');
+        warning.text('最多選 6 組數字');
+      }
+      $('.lottery-guest span').text(lotteryArr);
     });
 
     // 重設按鈕
     $('.reset').on('click', function () {
-
+      $('.lottery-nums > div').removeClass('selected');
+      lotteryArr.length = 0;
     });
 
 
     // 兌獎按鈕
     $('.btn-lottery').on('click', function () {
-
+      // for(i=1; i<50; i++){
+        let selectNum = $('.lottery-nums div.selected').text();
+        let a = [];
+        a.push(selectNum)
+        console.log(`last: ${a}`);
+      // }
     });
 
   </script>
