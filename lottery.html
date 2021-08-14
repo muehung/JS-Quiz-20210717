@@ -82,6 +82,7 @@
       $('.lottery-result span').text('');
       $('.lottery-nums div').removeClass('highlight');
       warning.text('');
+      $('body').removeClass('mask');
     });
 
     // 產生樂透號碼
@@ -98,9 +99,7 @@
         if(lotteryArr.indexOf(p) === -1){
           lotteryArr.push(p);
         }
-        
-        $('.lottery-nums div').eq(p).addClass('highlight');
-        
+        $('.lottery-nums div').eq(p-1).addClass('highlight');
       }
     }
 
@@ -119,7 +118,7 @@
         if( $('.lottery-result span').text() === '' ){
           
           lotteryCreat();
-          warning.text('開獎！！！');
+          warning.text('開獎啦！！！');
 
           // 印出樂透號碼
           $('.lottery-result span').text(lotteryArr);
@@ -129,14 +128,11 @@
       }
       
       
-      
-
-      
-
-      
       // // 比對
-      // let comPare = GuestNumArr.map(lotteryArr);
-      // $('.lottery-nums div').eq(comPare).addClass('.select');
+
+
+      // 遮罩
+      $('body').addClass('mask');
 
       
     });
