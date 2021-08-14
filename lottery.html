@@ -4,27 +4,35 @@
 <head>
   <meta charset="utf-8">
   <title>五倍樂透手動選號機</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<div class="warning"></div>
-  <input type="text">
 
-  <div class="wrap">
+  <div class="container">
 
-    <div class="lottery-nums"></div>
-    <div class="lottery-guest">已選號碼： <span></span></div>
-    <div class="lottery-result">開獎號碼： <span></span></div>
+      <div class="toast warning"></div>
 
-    <div class="btn-box">
-      <button class="btn btn-lottery">兌獎</button>
-      <button class="btn reset">重設</button>
-    </div>
+      <div class="wrap">
 
+        <div class="lottery-nums"></div>
+        <div class="lottery-guest">已選號碼： <span></span></div>
+        <div class="lottery-result">開獎號碼： <span></span></div>
+
+        <div class="btn-box">
+          <button class="btn btn-lottery">兌獎</button>
+          <button class="btn reset">重設</button>
+        </div>
+
+      </div>
   </div>
+  
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
   <!--
   延續先前範例
@@ -34,11 +42,14 @@
   -->
 
   <script type="text/javascript">
-    let i;
-    const lotteryArr = [];
+    
+    let GuestNumArr = [];
+    let lotteryArr = [];
+    let warning = $('.warning');
 
+    let i;
     // 產生 49 顆按鈕
-    for(i=0; i<50; i++){
+    for( i=1; i<50; i++ ){
       $('.lottery-nums').append(`<div>${i}</div>`);
     }
 
@@ -46,39 +57,88 @@
     $('.lottery-nums div').on('click', function (e) {
       let target = $(e.target);
       let text = $(target).text();
-      let check = lotteryArr.indexOf(text);
-      const warning = $('.warning');
+      let check = GuestNumArr.indexOf(text);
       
       warning.text('');
-      if( check === -1 ){
+      if( check === -1 && GuestNumArr.length < 6){
         $(target).addClass('selected');
-        lotteryArr.push(text);
+        GuestNumArr.push(text);
       } else {
         warning.text('不能重複選');
       }
-      if (lotteryArr.length > 6) {
-        lotteryArr.length === 5;
+      if (GuestNumArr.length > 6) {
+        GuestNumArr.length === 5;
         target.removeClass('selected');
         warning.text('最多選 6 組數字');
       }
-      $('.lottery-guest span').text(lotteryArr);
+      $('.lottery-guest span').text(GuestNumArr);
     });
 
     // 重設按鈕
     $('.reset').on('click', function () {
       $('.lottery-nums > div').removeClass('selected');
-      lotteryArr.length = 0;
+      GuestNumArr.length = 0;
+      $('.lottery-guest span').text('');
+      $('.lottery-result span').text('');
+      $('.lottery-nums div').removeClass('highlight');
+      warning.text('');
     });
+
+    // 產生樂透號碼
+    lotteryCreat = () => {
+      let n = 0;
+      let p;
+
+      $('.lottery-nums div').removeClass('highlight');
+      lotteryArr = [];
+      while(n < 6){
+        n++;
+        p = Math.floor( Math.random() * 49 ) + 1;
+        
+        if(lotteryArr.indexOf(p) === -1){
+          lotteryArr.push(p);
+        }
+        
+        $('.lottery-nums div').eq(p).addClass('highlight');
+        
+      }
+    }
+
+    
+    
 
 
     // 兌獎按鈕
     $('.btn-lottery').on('click', function () {
-      // for(i=1; i<50; i++){
-        let selectNum = $('.lottery-nums div.selected').text();
-        let a = [];
-        a.push(selectNum)
-        console.log(`last: ${a}`);
-      // }
+
+      // 先判斷有沒有 6 個自選號碼
+      if(GuestNumArr.length < 6){
+        warning.text('請先選滿 6 個號碼');
+      } else {
+        
+        if( $('.lottery-result span').text() === '' ){
+          
+          lotteryCreat();
+          warning.text('開獎！！！');
+
+          // 印出樂透號碼
+          $('.lottery-result span').text(lotteryArr);
+        } else {
+          warning.text('請期待下期樂透號碼');
+        }
+      }
+      
+      
+      
+
+      
+
+      
+      // // 比對
+      // let comPare = GuestNumArr.map(lotteryArr);
+      // $('.lottery-nums div').eq(comPare).addClass('.select');
+
+      
     });
 
   </script>

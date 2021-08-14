@@ -51,7 +51,7 @@ input {
     height: 60px;
     border-radius: 50%;
     border: 1px solid #999;
-    background-color: rgb(253, 255, 117);
+    background-color: #fff;
     color: #555;
     font-size: 20px;
     /* padding: 10px; */
@@ -70,8 +70,7 @@ input {
   }
 
   .lottery-nums .highlight {
-    background-color: red;
-    color: #fff;
+    box-shadow: 1px 1px 5px red;
   }
 
   .lottery-nums .selected.highlight {
@@ -86,5 +85,9 @@ input {
   }
   .lottery-result span, .lottery-guest span {
     display: block;
-    min-height: 3rem;
+    height: 3rem;
+  }
+
+  .warning {
+    height: 3rem;
   }
