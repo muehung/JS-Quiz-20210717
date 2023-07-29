@@ -1,15 +1,83 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+
+  @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;600;800&display=swap');
+
+/* reset CSS start */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	/* line-height: 1; */
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* reset CSS end */
+
+
+
+
+/*  */
 
 body {
-  font-family: 'Noto Sans', '微軟正黑體', Arial, Helvetica, sans-serif;
-  background-color: #ddd;
+  font-family: 'Tektur', cursive, 'Noto Sans', '微軟正黑體', Arial, Helvetica, sans-serif;
+  color: #fff;
   font-size: 16px;
-  height: 100%;
-  height: 100vh;
+}
+
+.container-main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, rgba(108, 56, 1, 0.65) 0%,rgba(151, 143, 255, 0.3) 100%), url('bg.jpg') no-repeat top center /cover;
+  padding: 4em 1em;
+}
+
+.main-header {
+  font-size: 5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #d5d5d5;
 }
 
 input {
@@ -20,21 +88,32 @@ input {
 }
 
 .wrap {
-    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em
   }
 
   .btn-box {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   .btn {
     font-size: 22px;
-    padding: 10px 15px;
+    font-weight: 800;
+    padding: 20px 50px;
     border-radius: 10px;
-    background-color: rgb(78, 204, 78);
+    color: #222;
+    border: 2px solid #ffb747;
+    background-color: #ffb747;
     margin: 1%;
   }
   .btn.reset {
+    color: #d38000;
+    background-color: #fff;
     position: relative;
     z-index: 99;
   }
@@ -56,8 +135,6 @@ input {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 1px solid #999;
-    background-color: #fff;
     color: #555;
     font-size: 20px;
     /* padding: 10px; */
@@ -65,34 +142,49 @@ input {
     line-height: 60px;
     margin-right: 10px;
     margin-bottom: 10px;
+    background: #fff;
   }
-  .lottery-nums>div:hover {
+  .lottery-nums>div:hover, .lottery-nums>div:focus {
     cursor: pointer;
-    background-color: rgba(49, 192, 49, 0.5);
+    background: -webkit-radial-gradient(center, ellipse cover,  #ffa755 0%,#ff7b29 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center,  #ffa755 0%,#ff7b29 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   }
   .lottery-nums .selected {
-    background-color: green;
+    background: -webkit-radial-gradient(center, ellipse cover,  #ff7b00 0%,#ff7b29 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center,  #ff7b00 0%,#ff7b29 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     color: #fff;
   }
 
   .lottery-nums .highlight {
-    box-shadow: 0 0 0 5px rgb(255, 0, 132);
+    box-shadow: 0 0 0 5px #ffa600;
     position: relative;
     z-index: 1;
   }
 
   .lottery-nums .selected.highlight {
-    background-color: yellow;
+    background-color: #fff371;
     color: #333;
     
   }
 
+  .lottery-result, .lottery-guest {
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+  }
   .lottery-result, .lottery-guest, .warning {
     text-align: center;
     font-size: 1.6rem;
-    
+  }
+  .lottery-result h3, .lottery-guest h3 {
+    margin-bottom: .2em;
   }
   .lottery-result span, .lottery-guest span {
+    background-color: #fff;
+    color: #222;
+    min-width: 200px;
+    width: fit-content;
+    margin: auto;
+    padding: 0 1em;
     display: block;
     height: 3rem;
     position: relative;
@@ -100,7 +192,7 @@ input {
   }
 
   .warning {
-    height: 3rem;
+    height: 90px;
     position: relative;
     z-index: 1;
   }

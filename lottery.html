@@ -3,26 +3,34 @@
 
 <head>
   <meta charset="utf-8">
-  <title>五倍樂透手動選號機</title>
+  <title>樂透手動選號機</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="container">
-
-      <div class="toast warning"></div>
+  <div class="container-main">
+      <h1 class="main-header">Lottory Game</h1>
+      <div class="toast warning d-flex justify-content-center">
+        <ul class="list text-left">
+          <li>1. 請選擇 6 組號碼</li>
+          <li>2. 按下兑獎按鈕</li>
+        </ul>
+      </div>
 
       <div class="wrap">
 
         <div class="lottery-nums"></div>
-        <div class="lottery-guest">已選號碼： <span></span></div>
-        <div class="lottery-result">開獎號碼： <span></span></div>
-
+        <div class="d-flex justify-content-center">
+          <div class="lottery-guest">
+            <h3>已選號碼</h3> <span></span></div>
+          <div class="lottery-result"><h3>開獎號碼</h3> <span></span></div>  
+        </div>
+        
         <div class="btn-box">
           <button class="btn btn-lottery">兌獎</button>
-          <button class="btn reset">重設</button>
+          <button class="btn reset">重新一局</button>
         </div>
 
       </div>
