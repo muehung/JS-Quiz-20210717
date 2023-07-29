@@ -186,9 +186,11 @@ input {
     margin: auto;
     padding: 0 1em;
     display: block;
-    height: 3rem;
     position: relative;
     z-index: 1;
+  }
+  .lottery-result span {
+    background-color: #ffdca4;
   }
 
   .warning {

@@ -12,11 +12,18 @@
 
   <div class="container-main">
       <h1 class="main-header">Lottory Game</h1>
-      <div class="toast warning d-flex justify-content-center">
-        <ul class="list text-left">
-          <li>1. 請選擇 6 組號碼</li>
-          <li>2. 按下兑獎按鈕</li>
-        </ul>
+      <div class="toast row justify-content-center align-items-center mb-3">
+        <div class="col-4">
+          <ul class="list text-left">
+            <li>1. 請選擇 6 組號碼，若沒選滿則重新開一局</li>
+            <li>2. 按下兑獎按鈕</li>
+            <li>3. 比對自選號碼與開獎號碼是否一樣</li>
+          </ul>
+        </div>
+        <div class="col-4">
+          <div class="warning"></div>
+        </div>
+        
       </div>
 
       <div class="wrap">
@@ -24,7 +31,7 @@
         <div class="lottery-nums"></div>
         <div class="d-flex justify-content-center">
           <div class="lottery-guest">
-            <h3>已選號碼</h3> <span></span></div>
+            <h3>自選號碼</h3> <span></span></div>
           <div class="lottery-result"><h3>開獎號碼</h3> <span></span></div>  
         </div>
         
@@ -120,7 +127,7 @@
 
       // 先判斷有沒有 6 個自選號碼
       if(GuestNumArr.length < 6){
-        warning.text('請先選滿 6 個號碼');
+        warning.text('需要選滿 6 個號碼');
       } else {
         
         if( $('.lottery-result span').text() === '' ){
